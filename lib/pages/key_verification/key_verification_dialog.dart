@@ -33,7 +33,10 @@ class KeyVerificationDialog extends StatefulWidget {
 
 class KeyVerificationPageState extends State<KeyVerificationDialog> {
   void Function()? originalOnUpdate;
-  late final List<dynamic> sasEmoji;
+  // Nullable (not `late final`) so the emoji-compare screen can render before
+  // the sas-emoji.json asset has finished loading, falling back to the emoji
+  // name instead of crashing with a LateInitializationError.
+  List<dynamic>? sasEmoji;
 
   @override
   void initState() {
